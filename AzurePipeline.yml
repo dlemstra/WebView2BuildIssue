@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: windows-2022
+
+steps:
+  - task: MSBuild@1
+    displayName: Build that works
+    inputs:
+      solution: WebView2BuildIssue.sln
+      msbuildArguments: '/t:Restore;Clean;Build;Publish /p:VersionThatWorks=true'
+
+  - task: MSBuild@1
+    displayName: Build that doesn't work
+    inputs:
+      solution: WebView2BuildIssue.sln
+      msbuildArguments: '/t:Restore;Clean;Build;Publish /p:VersionThatWorks=false'

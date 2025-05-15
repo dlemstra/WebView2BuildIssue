@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-2022
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Build that works
+      shell: cmd
+      run: msbuild WebView2BuildIssue.sln /t:Restore;Clean;Build;Publish /p:VersionThatWorks=true
+      
+    - name: Build that doesn't work
+      shell: cmd
+      run: msbuild WebView2BuildIssue.sln /t:Restore;Clean;Build;Publish /p:VersionThatWorks=false
