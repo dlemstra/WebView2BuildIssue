@@ -1,0 +1,1 @@
+﻿Repository that reproduces this issue: https://github.com/MicrosoftEdge/WebView2Feedback/issues/4925.
